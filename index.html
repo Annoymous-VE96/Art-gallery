@@ -1,0 +1,2721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRAXIS // CONTEMPORARY — Radical Art & Speculative Practices</title>
+  <meta name="description" content="PRAXIS is an independent contemporary art gallery in Lower East Side, New York, presenting radical, genre-defying exhibitions and represented artists.">
+  
+  <!-- Typography (Syne + Plus Jakarta Sans + Space Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM TOKENS (:root)
+       ========================================================================== */
+    :root {
+      /* Colors */
+      --color-bg: #0A0A0C;
+      --color-bg-alt: #121216;
+      --color-surface: #17171C;
+      --color-surface-hover: #22222A;
+      --color-surface-active: #2C2C36;
+      --color-foreground: #F5F4EE;
+      --color-muted: #9E9DAA;
+      --color-muted-dark: #585764;
+      
+      /* Light / Contrast Theme Tokens */
+      --color-bone: #F3F2EC;
+      --color-bone-dark: #0D0D10;
+      --color-bone-muted: #5A5964;
+
+      /* Accents */
+      --color-accent-lime: #D4FF00;       /* Acid Chartreuse */
+      --color-accent-cobalt: #2945FF;     /* Electric Cobalt */
+      --color-accent-magenta: #FF2E7E;    /* Neon Magenta */
+      --color-accent-orange: #FF5A1F;     /* Neon Vermillion */
+      --color-accent-glow: rgba(212, 255, 0, 0.28);
+      --color-cobalt-glow: rgba(41, 69, 255, 0.25);
+
+      /* Borders */
+      --color-border: rgba(245, 244, 238, 0.12);
+      --color-border-strong: rgba(245, 244, 238, 0.26);
+      --color-border-accent: rgba(212, 255, 0, 0.45);
+
+      /* Typography Tokens */
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+
+      /* Spacing Scale */
+      --space-2xs: 4px;
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 40px;
+      --space-xl: 64px;
+      --space-2xl: 96px;
+      --space-3xl: 140px;
+
+      /* Layout */
+      --container-max: 1480px;
+      --container-pad: clamp(18px, 4.5vw, 56px);
+      --header-height: 80px;
+      --header-height-condensed: 64px;
+
+      /* Transitions & Easing */
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --transition-fast: 180ms var(--ease-out-expo);
+      --transition-base: 360ms var(--ease-out-expo);
+      --transition-slow: 700ms var(--ease-out-expo);
+
+      /* UI Radius */
+      --radius-sm: 2px;
+      --radius-md: 4px;
+      --radius-lg: 12px;
+      --radius-full: 9999px;
+    }
+
+    /* ==========================================================================
+       RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      background-color: var(--color-bg);
+      color: var(--color-foreground);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--color-bg);
+      color: var(--color-foreground);
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background-color: var(--color-accent-lime);
+      color: #000000;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Focus Rings for Accessibility */
+    :focus-visible {
+      outline: 2px solid var(--color-accent-lime);
+      outline-offset: 4px;
+    }
+
+    /* Skip Navigation Link */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 20px;
+      background: var(--color-accent-lime);
+      color: #000000;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 12px 20px;
+      z-index: 10000;
+      transition: top 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .skip-link:focus {
+      top: 20px;
+    }
+
+    /* Noise Texture Layer */
+    .noise-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Custom Cursor */
+    .custom-cursor-follower {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid var(--color-accent-lime);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: width 0.25s var(--ease-out-expo), height 0.25s var(--ease-out-expo), background-color 0.25s, border-color 0.25s, opacity 0.2s;
+      mix-blend-mode: difference;
+    }
+
+    .custom-cursor-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background-color: var(--color-accent-lime);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 10000;
+      transition: transform 0.1s ease-out, opacity 0.2s;
+    }
+
+    .custom-cursor-follower.is-hovering {
+      width: 68px;
+      height: 68px;
+      background-color: rgba(212, 255, 0, 0.2);
+      border-color: var(--color-accent-lime);
+    }
+
+    @media (hover: none) or (pointer: coarse) {
+      .custom-cursor-follower, .custom-cursor-dot {
+        display: none !important;
+      }
+    }
+
+    /* Container Utility */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding-left: var(--container-pad);
+      padding-right: var(--container-pad);
+    }
+
+    /* Typography Utilities */
+    .font-mono { font-family: var(--font-mono); }
+    .font-display { font-family: var(--font-display); }
+    .text-lime { color: var(--color-accent-lime); }
+    .text-cobalt { color: var(--color-accent-cobalt); }
+    .text-muted { color: var(--color-muted); }
+    
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background-color: var(--color-accent-lime);
+    }
+
+    /* Reveal Animations on Scroll */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+    }
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       SECTION 1: HEADER / NAV
+       ========================================================================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      transition: height var(--transition-base), background-color var(--transition-base), border-color var(--transition-base), backdrop-filter var(--transition-base);
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-header.is-scrolled {
+      height: var(--header-height-condensed);
+      background-color: rgba(10, 10, 12, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    /* Brand Logo / Wordmark */
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.18rem;
+      letter-spacing: -0.02em;
+      color: var(--color-foreground);
+      text-transform: uppercase;
+      z-index: 1010;
+    }
+
+    .brand-mark .brand-id {
+      color: var(--color-accent-lime);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.85rem;
+      background: var(--color-surface);
+      padding: 3px 6px;
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .brand-mark:hover .brand-id {
+      background: var(--color-accent-lime);
+      color: #000000;
+      border-color: var(--color-accent-lime);
+    }
+
+    .brand-mark .city-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--color-muted);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      margin-left: 4px;
+      display: none;
+    }
+    @media (min-width: 900px) {
+      .brand-mark .city-tag {
+        display: inline-block;
+      }
+    }
+
+    /* Live Status Badge */
+    .live-status-pill {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(23, 23, 28, 0.85);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: var(--color-foreground);
+      text-transform: uppercase;
+    }
+    @media (min-width: 1100px) {
+      .live-status-pill {
+        display: inline-flex;
+      }
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background-color: var(--color-accent-lime);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--color-accent-lime);
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
+    /* Navigation Links */
+    .nav-desktop {
+      display: none;
+      align-items: center;
+      gap: 28px;
+    }
+    @media (min-width: 920px) {
+      .nav-desktop {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--color-muted);
+      position: relative;
+      padding: 8px 0;
+      font-weight: 500;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-accent-lime);
+      transition: width var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--color-foreground);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Action CTA Button */
+    .btn-nav-action {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 10px 20px;
+      background-color: var(--color-foreground);
+      color: #000000;
+      border: 1px solid var(--color-foreground);
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-nav-action:hover {
+      background-color: var(--color-accent-lime);
+      border-color: var(--color-accent-lime);
+      color: #000000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px var(--color-accent-glow);
+    }
+
+    /* Mobile Hamburger Trigger */
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      z-index: 1010;
+      gap: 5px;
+      transition: border-color var(--transition-fast), background-color var(--transition-fast);
+    }
+    @media (min-width: 920px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background-color: var(--color-foreground);
+      transition: transform var(--transition-base), opacity var(--transition-fast), background-color var(--transition-fast);
+      transform-origin: center;
+    }
+
+    .menu-toggle:hover {
+      border-color: var(--color-accent-lime);
+    }
+
+    .menu-toggle.is-active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+      background-color: var(--color-accent-lime);
+    }
+    .menu-toggle.is-active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .menu-toggle.is-active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+      background-color: var(--color-accent-lime);
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background-color: #0C0C0F;
+      z-index: 1005;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 100px var(--container-pad) 40px;
+      transition: right 0.45s var(--ease-out-expo);
+      border-left: 1px solid var(--color-border-strong);
+    }
+    @media (min-width: 500px) {
+      .mobile-drawer {
+        width: 440px;
+      }
+    }
+
+    .mobile-drawer.is-open {
+      right: 0;
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-nav-link {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 2.75rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--color-foreground);
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      transition: color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .mobile-nav-link .link-num {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--color-accent-lime);
+      font-weight: 400;
+    }
+
+    .mobile-nav-link:hover {
+      color: var(--color-accent-lime);
+      transform: translateX(8px);
+    }
+
+    .mobile-drawer-footer {
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mobile-drawer-footer strong {
+      color: var(--color-foreground);
+    }
+
+    /* Drawer Backdrop */
+    .drawer-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 1002;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .drawer-backdrop.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ==========================================================================
+       SECTION 2: HERO POSTER
+       ========================================================================== */
+    .section-hero {
+      position: relative;
+      min-height: calc(100vh - var(--header-height));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: calc(var(--header-height) + 20px);
+      padding-bottom: var(--space-md);
+      overflow: hidden;
+      background: radial-gradient(circle at 80% 20%, rgba(41, 69, 255, 0.18) 0%, rgba(10, 10, 12, 0) 55%),
+                  radial-gradient(circle at 10% 80%, rgba(212, 255, 0, 0.08) 0%, rgba(10, 10, 12, 0) 45%);
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-size: 80px 80px;
+      background-image: 
+        linear-gradient(to right, rgba(245, 244, 238, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(245, 244, 238, 0.03) 1px, transparent 1px);
+      pointer-events: none;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 85%);
+      -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 85%);
+    }
+
+    .hero-content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    @media (min-width: 1024px) {
+      .hero-content-wrapper {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: var(--space-xl);
+      }
+    }
+
+    .hero-headline-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-top-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      margin-bottom: var(--space-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-top-meta .badge-edition {
+      background: var(--color-accent-lime);
+      color: #000000;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 9.5vw, 8.5rem);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--color-foreground);
+      margin-bottom: var(--space-md);
+    }
+
+    .hero-title .title-accent {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--color-accent-lime);
+      transition: color var(--transition-fast);
+    }
+    .hero-title .title-accent:hover {
+      color: var(--color-accent-lime);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      font-weight: 400;
+      color: var(--color-muted);
+      max-width: 580px;
+      line-height: 1.55;
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero-subtitle strong {
+      color: var(--color-foreground);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .btn-hero-primary {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 16px 32px;
+      background-color: var(--color-accent-lime);
+      color: #000000;
+      border: 1px solid var(--color-accent-lime);
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all var(--transition-fast);
+      box-shadow: 0 0 30px rgba(212, 255, 0, 0.25);
+    }
+
+    .btn-hero-primary:hover {
+      background-color: #FFFFFF;
+      border-color: #FFFFFF;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 35px rgba(255, 255, 255, 0.35);
+    }
+
+    .btn-hero-secondary {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 16px 28px;
+      background-color: transparent;
+      color: var(--color-foreground);
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-hero-secondary:hover {
+      border-color: var(--color-accent-lime);
+      color: var(--color-accent-lime);
+      transform: translateY(-3px);
+      background-color: rgba(212, 255, 0, 0.04);
+    }
+
+    /* Hero Centerpiece Artwork Card */
+    .hero-visual-card {
+      position: relative;
+      border: 1px solid var(--color-border-strong);
+      background-color: var(--color-surface);
+      padding: 14px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      transition: transform 0.4s var(--ease-out-expo), border-color 0.4s ease;
+    }
+    .hero-visual-card:hover {
+      border-color: var(--color-accent-lime);
+      transform: scale(1.015);
+    }
+
+    .hero-visual-card .artwork-frame {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      background-color: #000000;
+    }
+
+    .hero-visual-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-out-expo);
+    }
+    .hero-visual-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .hero-visual-card .card-caption {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+    }
+    .hero-visual-card .card-caption strong {
+      color: var(--color-foreground);
+    }
+
+    .hero-floating-badge {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      background: var(--color-accent-cobalt);
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 8px 25px rgba(41, 69, 255, 0.5);
+      z-index: 3;
+    }
+
+    /* Live Animated Marquee Ticker */
+    .hero-ticker-tape {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      background-color: var(--color-accent-lime);
+      color: #000000;
+      padding: 12px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      margin-top: var(--space-xl);
+      z-index: 5;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      align-items: center;
+      animation: tickerRoll 28s linear infinite;
+    }
+
+    .ticker-item {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ticker-item .sep {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #000000;
+      border-radius: 50%;
+    }
+
+    @keyframes tickerRoll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ==========================================================================
+       SECTION 3: CURRENT EXHIBITION (Feature Showcase)
+       ========================================================================== */
+    .section-exhibition {
+      position: relative;
+      padding: var(--space-3xl) 0;
+      background-color: #0E0F14;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      background-image: radial-gradient(circle at 15% 50%, rgba(41, 69, 255, 0.14) 0%, transparent 60%),
+                        radial-gradient(circle at 85% 30%, rgba(212, 255, 0, 0.06) 0%, transparent 50%);
+    }
+
+    .exhibition-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+    @media (min-width: 1024px) {
+      .exhibition-layout {
+        grid-template-columns: 1fr 1.15fr;
+        gap: var(--space-2xl);
+      }
+    }
+
+    .exhibition-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exhibition-dates-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent-lime);
+      background: rgba(212, 255, 0, 0.08);
+      border: 1px solid var(--color-border-accent);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-md);
+      align-self: flex-start;
+    }
+
+    .exhibition-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5.5vw, 4.8rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .exhibition-artists {
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      color: var(--color-foreground);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-md);
+      text-transform: uppercase;
+    }
+
+    .exhibition-artists span {
+      color: var(--color-accent-cobalt);
+    }
+
+    .exhibition-curator-blurb {
+      font-size: 1.05rem;
+      color: var(--color-muted);
+      line-height: 1.7;
+      margin-bottom: var(--space-lg);
+      border-left: 2px solid var(--color-accent-lime);
+      padding-left: 20px;
+    }
+
+    .exhibition-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      padding: 20px 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: var(--space-lg);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .meta-item .meta-label {
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .meta-item .meta-value {
+      color: var(--color-foreground);
+      font-weight: 700;
+    }
+
+    .exhibition-media-showcase {
+      position: relative;
+    }
+
+    .exhibition-image-wrapper {
+      position: relative;
+      border: 1px solid var(--color-border-strong);
+      background-color: var(--color-surface);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+    }
+
+    .exhibition-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 16 / 10;
+      transition: transform 0.8s var(--ease-out-expo);
+    }
+    .exhibition-image-wrapper:hover img {
+      transform: scale(1.04);
+    }
+
+    .artwork-tag-overlay {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      background: rgba(10, 10, 12, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--color-border);
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+
+    .artwork-tag-overlay .title {
+      font-weight: 700;
+      color: var(--color-foreground);
+      text-transform: uppercase;
+    }
+
+    .artwork-tag-overlay .medium {
+      color: var(--color-accent-lime);
+    }
+
+    /* ==========================================================================
+       SECTION 4: FEATURED ARTISTS (Broken Grid / Bento)
+       ========================================================================== */
+    .section-artists {
+      position: relative;
+      padding: var(--space-3xl) 0;
+      background-color: var(--color-bg);
+      background-image: 
+        radial-gradient(circle at 90% 70%, rgba(212, 255, 0, 0.05) 0%, transparent 45%);
+    }
+
+    .section-header-row {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--space-2xl);
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .section-header-row {
+        flex-direction: row;
+        align-items: flex-end;
+      }
+    }
+
+    .section-main-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      line-height: 0.95;
+    }
+
+    .artists-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    @media (min-width: 768px) {
+      .artists-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1200px) {
+      .artists-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+        grid-template-rows: auto auto;
+      }
+      .artists-grid .artist-card:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+      }
+    }
+
+    .artist-card {
+      position: relative;
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+    }
+    .artist-card:hover {
+      border-color: var(--color-accent-lime);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .artist-image-container {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background-color: #000000;
+    }
+
+    .artist-card:nth-child(2) .artist-image-container {
+      aspect-ratio: 4 / 5;
+    }
+
+    .artist-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-out-expo);
+    }
+    .artist-card:hover .artist-image-container img {
+      transform: scale(1.06);
+    }
+
+    .artist-card-body {
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+      background: linear-gradient(180deg, var(--color-surface) 0%, #111115 100%);
+    }
+
+    .artist-name-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .artist-name {
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .artist-location {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--color-accent-lime);
+      text-transform: uppercase;
+    }
+
+    .artist-medium {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .artist-statement {
+      font-size: 0.95rem;
+      color: #D1D0DA;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .artist-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--color-border);
+      padding-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+    }
+
+    .artist-card-footer .catalog-link {
+      color: var(--color-foreground);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .artist-card-footer .catalog-link:hover {
+      color: var(--color-accent-lime);
+    }
+
+    /* ==========================================================================
+       SECTION 5: PHILOSOPHY / MANIFESTO (Visual Rhythm Break)
+       ========================================================================== */
+    .section-philosophy {
+      position: relative;
+      padding: var(--space-3xl) 0;
+      background-color: var(--color-bone);
+      color: var(--color-bone-dark);
+      overflow: hidden;
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+    @media (min-width: 1024px) {
+      .philosophy-grid {
+        grid-template-columns: 1.25fr 0.75fr;
+      }
+    }
+
+    .philosophy-manifesto {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .philosophy-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #000000;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: var(--space-md);
+    }
+    .philosophy-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 3px;
+      background-color: #000000;
+    }
+
+    .philosophy-quote {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.2vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--color-bone-dark);
+      margin-bottom: var(--space-lg);
+    }
+
+    .philosophy-quote .highlight {
+      background-color: var(--color-accent-lime);
+      color: #000000;
+      padding: 0 8px;
+    }
+
+    .philosophy-text {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--color-bone-muted);
+      max-width: 680px;
+    }
+
+    /* Philosophy Statistics / Impact Numbers */
+    .philosophy-stats-card {
+      background-color: var(--color-bone-dark);
+      color: var(--color-foreground);
+      padding: var(--space-xl) var(--space-lg);
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid rgba(245, 244, 238, 0.15);
+      padding-bottom: 20px;
+    }
+    .stat-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 4vw, 3.4rem);
+      font-weight: 900;
+      color: var(--color-accent-lime);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 6px;
+    }
+
+    /* ==========================================================================
+       SECTION 6: ARCHIVE / PAST EXHIBITIONS
+       ========================================================================== */
+    .section-archive {
+      position: relative;
+      padding: var(--space-3xl) 0;
+      background-color: #09090C;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .archive-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: var(--space-xl);
+    }
+
+    .archive-filter-btn {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 8px 18px;
+      background-color: var(--color-surface);
+      color: var(--color-muted);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .archive-filter-btn:hover, .archive-filter-btn.is-active {
+      background-color: var(--color-accent-lime);
+      color: #000000;
+      border-color: var(--color-accent-lime);
+    }
+
+    .archive-timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .archive-item {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      padding: 24px;
+      align-items: center;
+      transition: all var(--transition-base);
+    }
+    @media (min-width: 768px) {
+      .archive-item {
+        grid-template-columns: 180px 1fr 200px auto;
+        gap: 32px;
+      }
+    }
+
+    .archive-item:hover {
+      background-color: #1E1E26;
+      border-color: var(--color-accent-lime);
+      transform: translateX(6px);
+    }
+
+    .archive-thumbnail {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background-color: #000;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+    }
+    .archive-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .archive-item:hover .archive-thumbnail img {
+      transform: scale(1.08);
+    }
+
+    .archive-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .archive-year {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-accent-lime);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .archive-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--color-foreground);
+    }
+
+    .archive-artist {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      margin-top: 4px;
+    }
+
+    .archive-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      border: 1px solid var(--color-border);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .archive-btn-view {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-foreground);
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .archive-item:hover .archive-btn-view {
+      color: var(--color-accent-lime);
+    }
+
+    /* ==========================================================================
+       SECTION 7: VISIT (Spatial Guide & Map)
+       ========================================================================== */
+    .section-visit {
+      position: relative;
+      padding: var(--space-3xl) 0;
+      background: radial-gradient(circle at 10% 20%, rgba(41, 69, 255, 0.12) 0%, transparent 50%),
+                  #0B0B0E;
+    }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+      align-items: stretch;
+    }
+    @media (min-width: 1024px) {
+      .visit-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .visit-info-card {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border-strong);
+      padding: var(--space-xl) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 36px;
+    }
+
+    .visit-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .visit-block-title {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--color-accent-lime);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    .visit-block-content {
+      font-size: 1.1rem;
+      color: var(--color-foreground);
+      line-height: 1.6;
+    }
+
+    .transit-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .subway-pill {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: #000000;
+      color: #FFFFFF;
+      border: 1px solid var(--color-border);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .subway-pill span.line-badge {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 0.7rem;
+      font-weight: 800;
+    }
+    .line-orange { background: #FF6319; color: #fff; }
+    .line-brown { background: #996633; color: #fff; }
+
+    /* Stylized Interactive Map Blueprint */
+    .visit-map-container {
+      position: relative;
+      border: 1px solid var(--color-border-strong);
+      background-color: #0E0F14;
+      overflow: hidden;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+    }
+
+    .map-svg-blueprint {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.85;
+    }
+
+    .map-hud-top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-accent-lime);
+      text-transform: uppercase;
+      background: rgba(10, 10, 12, 0.75);
+      backdrop-filter: blur(8px);
+      padding: 8px 14px;
+      border: 1px solid var(--color-border);
+    }
+
+    .map-pin-indicator {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .pin-pulse {
+      width: 22px;
+      height: 22px;
+      background-color: var(--color-accent-lime);
+      border-radius: 50%;
+      box-shadow: 0 0 0 10px rgba(212, 255, 0, 0.25);
+      animation: mapPinPulse 2s infinite;
+    }
+
+    @keyframes mapPinPulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 255, 0, 0.6); }
+      70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(212, 255, 0, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 255, 0, 0); }
+    }
+
+    .pin-label {
+      margin-top: 10px;
+      background: #000000;
+      color: var(--color-accent-lime);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border: 1px solid var(--color-accent-lime);
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .map-hud-bottom {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-directions {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      background-color: var(--color-accent-lime);
+      color: #000000;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      transition: all var(--transition-fast);
+    }
+    .btn-directions:hover {
+      background-color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       SECTION 8: CONTACT & DISPATCH
+       ========================================================================== */
+    .section-contact {
+      position: relative;
+      padding: var(--space-3xl) 0;
+      background-color: #0F0F14;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+    @media (min-width: 1024px) {
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .contact-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .contact-card-item {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color var(--transition-fast);
+    }
+    .contact-card-item:hover {
+      border-color: var(--color-accent-lime);
+    }
+
+    .contact-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-accent-lime);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .contact-val {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 700;
+      color: var(--color-foreground);
+    }
+
+    .contact-val a:hover {
+      color: var(--color-accent-lime);
+    }
+
+    /* Newsletter Dispatch Box */
+    .dispatch-box {
+      background: linear-gradient(135deg, #181822 0%, #111116 100%);
+      border: 1px solid var(--color-border-strong);
+      padding: var(--space-xl) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .dispatch-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .dispatch-desc {
+      color: var(--color-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .dispatch-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .form-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    @media (min-width: 600px) {
+      .form-input-group {
+        flex-direction: row;
+      }
+    }
+
+    .dispatch-input {
+      flex: 1;
+      padding: 16px 20px;
+      background-color: #0A0A0D;
+      border: 1px solid var(--color-border-strong);
+      color: var(--color-foreground);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      border-radius: var(--radius-sm);
+      transition: border-color var(--transition-fast);
+    }
+    .dispatch-input:focus {
+      outline: none;
+      border-color: var(--color-accent-lime);
+    }
+
+    .btn-dispatch-submit {
+      padding: 16px 28px;
+      background-color: var(--color-accent-lime);
+      color: #000000;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+    }
+    .btn-dispatch-submit:hover {
+      background-color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    .dispatch-feedback-toast {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-accent-lime);
+      padding: 10px 14px;
+      background: rgba(212, 255, 0, 0.1);
+      border: 1px solid var(--color-accent-lime);
+      border-radius: var(--radius-sm);
+    }
+
+    /* ==========================================================================
+       SECTION 9: FOOTER
+       ========================================================================== */
+    .site-footer {
+      background-color: #060608;
+      border-top: 1px solid var(--color-border-strong);
+      padding: var(--space-3xl) 0 var(--space-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-watermark {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 22vw, 24rem);
+      font-weight: 900;
+      color: rgba(245, 244, 238, 0.02);
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+      line-height: 0.8;
+      z-index: 1;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+      position: relative;
+      z-index: 2;
+      margin-bottom: var(--space-2xl);
+    }
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+
+    .footer-col-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-brand-title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-brand-desc {
+      color: var(--color-muted);
+      font-size: 0.95rem;
+      max-width: 380px;
+      line-height: 1.6;
+    }
+
+    .footer-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links-title {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--color-accent-lime);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+    }
+
+    .footer-link {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .footer-link:hover {
+      color: var(--color-foreground);
+    }
+
+    .footer-bottom-row {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-lg);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      position: relative;
+      z-index: 2;
+    }
+    @media (min-width: 768px) {
+      .footer-bottom-row {
+        flex-direction: row;
+      }
+    }
+
+    .btn-scroll-top {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-foreground);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+    }
+    .btn-scroll-top:hover {
+      background-color: var(--color-accent-lime);
+      color: #000000;
+      border-color: var(--color-accent-lime);
+    }
+
+    /* ==========================================================================
+       ACCESSIBILITY & REDUCED MOTION
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .ticker-track {
+        animation: none !important;
+      }
+      .pulse-dot, .pin-pulse {
+        animation: none !important;
+      }
+      .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Accessibility Skip Navigation -->
+  <a href="#main-content" class="skip-link">Skip to Main Content</a>
+
+  <!-- Noise Texture Layer -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor-follower" id="cursorFollower" aria-hidden="true"></div>
+  <div class="custom-cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- Mobile Drawer Backdrop -->
+  <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+
+  <!-- ========================================================================
+       SECTION 1: HEADER / NAV
+       ======================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <!-- Gallery Wordmark / Mark -->
+      <a href="#" class="brand-mark" aria-label="PRAXIS CONTEMPORARY Gallery Homepage">
+        <span>PRAXIS</span>
+        <span class="brand-id">// 01</span>
+        <span class="city-tag">NYC / LES</span>
+      </a>
+
+      <!-- Current Exhibition Live Indicator -->
+      <div class="live-status-pill" aria-label="Current gallery status">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>NOW: HYPER-TERRA (OPEN 11–19)</span>
+      </div>
+
+      <!-- Desktop Navigation Anchors -->
+      <nav class="nav-desktop" aria-label="Primary Navigation">
+        <a href="#exhibitions" class="nav-link">Exhibitions</a>
+        <a href="#artists" class="nav-link">Artists</a>
+        <a href="#philosophy" class="nav-link">Philosophy</a>
+        <a href="#archive" class="nav-link">Archive</a>
+        <a href="#visit" class="nav-link">Visit</a>
+        <a href="#contact" class="btn-nav-action">Contact</a>
+      </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Toggle mobile navigation menu" aria-controls="mobileDrawer">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="mobile-nav-links">
+      <a href="#exhibitions" class="mobile-nav-link" onclick="closeMobileMenu()"><span class="link-num">01</span> Exhibitions</a>
+      <a href="#artists" class="mobile-nav-link" onclick="closeMobileMenu()"><span class="link-num">02</span> Artists</a>
+      <a href="#philosophy" class="mobile-nav-link" onclick="closeMobileMenu()"><span class="link-num">03</span> Philosophy</a>
+      <a href="#archive" class="mobile-nav-link" onclick="closeMobileMenu()"><span class="link-num">04</span> Archive</a>
+      <a href="#visit" class="mobile-nav-link" onclick="closeMobileMenu()"><span class="link-num">05</span> Visit</a>
+      <a href="#contact" class="mobile-nav-link" onclick="closeMobileMenu()"><span class="link-num">06</span> Contact</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <div><strong>PRAXIS CONTEMPORARY</strong></div>
+      <div>184 Chrystie Street, New York, NY 10002</div>
+      <div>Wed – Sat: 11:00 – 19:00 | Sun: 12:00 – 17:00</div>
+    </div>
+  </aside>
+
+  <!-- Main Content Container -->
+  <main id="main-content">
+    
+    <!-- ======================================================================
+         SECTION 2: HERO POSTER
+         ====================================================================== -->
+    <section class="section-hero" id="hero" aria-label="Hero Overview">
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+      
+      <div class="container hero-content-wrapper">
+        <div class="hero-headline-block">
+          <div class="hero-top-meta">
+            <span class="badge-edition">PROGRAM 2026</span>
+            <span>40.7196° N, 73.9928° W</span>
+            <span>• LOWER EAST SIDE, NY</span>
+          </div>
+          
+          <h1 class="hero-title">
+            RADICAL
+            <span class="title-accent">PRAXIS</span>
+            PROJECT
+          </h1>
+          
+          <p class="hero-subtitle">
+            A contemporary exhibition space championing <strong>visceral painting</strong>, <strong>speculative digitalism</strong>, and <strong>brutalist material form</strong>.
+          </p>
+          
+          <div class="hero-actions">
+            <a href="#exhibitions" class="btn-hero-primary">Explore Current Show ↓</a>
+            <a href="#visit" class="btn-hero-secondary">Plan Your Visit</a>
+          </div>
+        </div>
+
+        <!-- Hero Featured Visual Card -->
+        <!-- PLACEHOLDER ARTWORK: replace with client photography -->
+        <div class="hero-visual-card reveal-on-scroll">
+          <div class="hero-floating-badge">FEATURED CENTERPIECE</div>
+          <div class="artwork-frame">
+            <img src="assets/images/hero.jpg" alt="Masterpiece abstract painting with heavy blue and acid lime impasto strokes" width="1280" height="800" loading="eager">
+          </div>
+          <div class="card-caption">
+            <div><strong>SONIC CHAOS: ABSTRACT RHYTHMS</strong> / 2026</div>
+            <div class="text-lime">OIL ON CANVAS (96 × 144 IN)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Marquee Ticker -->
+      <div class="hero-ticker-tape" aria-hidden="true">
+        <div class="ticker-track">
+          <span class="ticker-item">NOW ON VIEW: HYPER-TERRA <span class="sep"></span></span>
+          <span class="ticker-item">ELENA VANCE & TARO TAKAHASHI <span class="sep"></span></span>
+          <span class="ticker-item">WED – SAT 11:00 – 19:00 <span class="sep"></span></span>
+          <span class="ticker-item">184 CHRYSTIE STREET, LOWER EAST SIDE NYC <span class="sep"></span></span>
+          <span class="ticker-item">ADMISSION FREE / CURATED RESEARCH <span class="sep"></span></span>
+          <span class="ticker-item">NOW ON VIEW: HYPER-TERRA <span class="sep"></span></span>
+          <span class="ticker-item">ELENA VANCE & TARO TAKAHASHI <span class="sep"></span></span>
+          <span class="ticker-item">WED – SAT 11:00 – 19:00 <span class="sep"></span></span>
+          <span class="ticker-item">184 CHRYSTIE STREET, LOWER EAST SIDE NYC <span class="sep"></span></span>
+          <span class="ticker-item">ADMISSION FREE / CURATED RESEARCH <span class="sep"></span></span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 3: CURRENT EXHIBITION (Feature Showcase)
+         <!-- PLACEHOLDER EXHIBITION -->
+         ====================================================================== -->
+    <section class="section-exhibition" id="exhibitions" aria-label="Current Exhibition">
+      <div class="container">
+        <div class="exhibition-layout">
+          <!-- Text & Curatorial Info -->
+          <div class="exhibition-info reveal-on-scroll">
+            <div class="exhibition-dates-pill">
+              <span class="pulse-dot"></span>
+              <span>OCTOBER 12 – DECEMBER 20, 2026</span>
+            </div>
+            
+            <div class="section-eyebrow text-lime">MAIN GALLERY INSTALLATION</div>
+            
+            <h2 class="exhibition-title">
+              HYPER-TERRA: SYNTHETIC GEOLOGIES
+            </h2>
+            
+            <div class="exhibition-artists">
+              FEATURING <span>ELENA VANCE</span> & <span>TARO TAKAHASHI</span>
+            </div>
+            
+            <p class="exhibition-curator-blurb">
+              An immersive spatial inquiry investigating artificial strata, mineral synthesis, and planetary memory. Combining raw obsidian boulders with neon bismuth crystallization and kinetic liquid chrome polymers.
+            </p>
+            
+            <div class="exhibition-meta-grid">
+              <div class="meta-item">
+                <div class="meta-label">Curator</div>
+                <div class="meta-value">Dr. Julian Richter</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Spatial Scale</div>
+                <div class="meta-value">Main Hall (3,400 sq ft)</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Audio Guide</div>
+                <div class="meta-value text-lime">Available via QR (24m)</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Catalog</div>
+                <div class="meta-value">Hardcover 128pp (Edition of 500)</div>
+              </div>
+            </div>
+            
+            <div>
+              <a href="#visit" class="btn-hero-primary">Book Gallery Access →</a>
+            </div>
+          </div>
+
+          <!-- Featured Exhibition Media -->
+          <!-- PLACEHOLDER ARTWORK: replace with client photography -->
+          <div class="exhibition-media-showcase reveal-on-scroll">
+            <div class="exhibition-image-wrapper">
+              <img src="assets/images/current_exhibition.jpg" alt="Contemporary sculpture installation combining dark volcanic obsidian rock and glowing neon green bismuth crystals" width="1280" height="720" loading="lazy">
+              <div class="artwork-tag-overlay">
+                <div>
+                  <div class="title">SYNTHETIC GEOLOGY NO. 04</div>
+                  <div style="font-size:0.7rem; color:var(--color-muted)">ELENA VANCE (2026)</div>
+                </div>
+                <div class="medium">OBSIDIAN, BISMUTH, LIQUID CHROME</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 4: FEATURED ARTISTS (Broken Grid / Bento)
+         ====================================================================== -->
+    <section class="section-artists" id="artists" aria-label="Represented Artists">
+      <div class="container">
+        <div class="section-header-row reveal-on-scroll">
+          <div>
+            <div class="section-eyebrow text-lime">ROSTER // 2026</div>
+            <h2 class="section-main-heading">REPRESENTED ARTISTS</h2>
+          </div>
+          <p class="font-mono text-muted" style="max-width:380px; font-size:0.85rem;">
+            Artists pushing the tactile, digital, and structural limits of contemporary practice.
+          </p>
+        </div>
+
+        <div class="artists-grid">
+          <!-- Artist 1 -->
+          <!-- PLACEHOLDER ARTWORK: replace with client photography -->
+          <article class="artist-card reveal-on-scroll">
+            <div class="artist-image-container">
+              <img src="assets/images/artist_1.jpg" alt="Abstract gestural painting with heavy red and ultramarine blue brushstrokes on canvas" width="800" height="600" loading="lazy">
+            </div>
+            <div class="artist-card-body">
+              <div>
+                <div class="artist-name-row">
+                  <h3 class="artist-name">KAELEN VOSS</h3>
+                  <span class="artist-location">BERLIN / NYC</span>
+                </div>
+                <div class="artist-medium">RAW GESTURAL PAINTING & TEXTURED OIL</div>
+                <p class="artist-statement">
+                  Explores visceral catharsis through monumental impasto brushwork, contrasting industrial pigments against unstretched linen.
+                </p>
+              </div>
+              <div class="artist-card-footer">
+                <span>SOLO SHOW: APR 2027</span>
+                <a href="#contact" class="catalog-link">View Portfolio ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artist 2 -->
+          <!-- PLACEHOLDER ARTWORK: replace with client photography -->
+          <article class="artist-card reveal-on-scroll">
+            <div class="artist-image-container">
+              <img src="assets/images/artist_2.jpg" alt="Kinetic light sculpture with suspended dichroic glass panels reflecting vibrant chromatic spectrum" width="800" height="1000" loading="lazy">
+            </div>
+            <div class="artist-card-body">
+              <div>
+                <div class="artist-name-row">
+                  <h3 class="artist-name">ARIA STERLING</h3>
+                  <span class="artist-location">LONDON</span>
+                </div>
+                <div class="artist-medium">PRISMATIC OPTICS & KINETIC LIGHT</div>
+                <p class="artist-statement">
+                  Sculpts ambient atmospheric waves using custom dichroic glass arrays and programmed laser caustics that warp gallery architecture.
+                </p>
+              </div>
+              <div class="artist-card-footer">
+                <span>BIENNALE PARTICIPANT</span>
+                <a href="#contact" class="catalog-link">View Portfolio ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artist 3 -->
+          <!-- PLACEHOLDER ARTWORK: replace with client photography -->
+          <article class="artist-card reveal-on-scroll">
+            <div class="artist-image-container">
+              <img src="assets/images/artist_3.jpg" alt="Brutalist steel beam and crushed terracotta sculpture intertwined with neon orange gas discharge tubes" width="800" height="600" loading="lazy">
+            </div>
+            <div class="artist-card-body">
+              <div>
+                <div class="artist-name-row">
+                  <h3 class="artist-name">DAX RAMIREZ</h3>
+                  <span class="artist-location">MEXICO CITY</span>
+                </div>
+                <div class="artist-medium">BRUTALIST METALLURGY & NOBLE GAS</div>
+                <p class="artist-statement">
+                  Assemblages of reclaimed demolition I-beams, crushed clay bricks, and high-voltage neon argon glowing with industrial urgency.
+                </p>
+              </div>
+              <div class="artist-card-footer">
+                <span>MUSEUM PERMANENT COLL.</span>
+                <a href="#contact" class="catalog-link">View Portfolio ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artist 4 -->
+          <!-- PLACEHOLDER ARTWORK: replace with client photography -->
+          <article class="artist-card reveal-on-scroll">
+            <div class="artist-image-container">
+              <img src="assets/images/artist_4.jpg" alt="Futuristic luminescent fiber optic tapestry cascade glowing with cyan and violet light in a dark hall" width="800" height="600" loading="lazy">
+            </div>
+            <div class="artist-card-body">
+              <div>
+                <div class="artist-name-row">
+                  <h3 class="artist-name">ZHEN WEI</h3>
+                  <span class="artist-location">TOKYO / SHANGHAI</span>
+                </div>
+                <div class="artist-medium">DIGITAL WEAVING & FIBER-OPTIC TEXTILE</div>
+                <p class="artist-statement">
+                  Merges ancient loom weaving traditions with reactive micro-luminescent optical threads responsive to live seismic data streams.
+                </p>
+              </div>
+              <div class="artist-card-footer">
+                <span>COMMISSIONED 2026</span>
+                <a href="#contact" class="catalog-link">View Portfolio ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 5: PHILOSOPHY / MANIFESTO (Visual Rhythm Break)
+         ====================================================================== -->
+    <section class="section-philosophy" id="philosophy" aria-label="Gallery Philosophy">
+      <div class="container">
+        <div class="philosophy-grid">
+          <!-- Manifesto Pull Quote -->
+          <div class="philosophy-manifesto reveal-on-scroll">
+            <div class="philosophy-eyebrow">CURATORIAL MANIFESTO</div>
+            <blockquote class="philosophy-quote">
+              "We champion <span class="highlight">radical</span>, genre-defying contemporary practices at the intersection of material sculpture, speculative digitalism, and raw visceral painting. <span class="highlight">No beige art.</span> No polite compromises."
+            </blockquote>
+            <p class="philosophy-text">
+              Founded in New York's Lower East Side, PRAXIS operates as a laboratory for uncompromising ideas. We reject decorative market complacency in favor of audacious physical presence, intense materiality, and conceptual courage.
+            </p>
+          </div>
+
+          <!-- Gallery Facts & Statistics -->
+          <div class="philosophy-stats-card reveal-on-scroll">
+            <div class="stat-row">
+              <div class="stat-number">04</div>
+              <div class="stat-label">Major Curated Exhibitions Per Year</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-number">18</div>
+              <div class="stat-label">International Represented Artists</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Free Public Gallery Admission</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-number">2021</div>
+              <div class="stat-label">Established in NYC Bowery District</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 6: ARCHIVE / PAST EXHIBITIONS
+         ====================================================================== -->
+    <section class="section-archive" id="archive" aria-label="Exhibition Archive">
+      <div class="container">
+        <div class="section-header-row reveal-on-scroll">
+          <div>
+            <div class="section-eyebrow text-lime">CHRONOLOGICAL RECORD</div>
+            <h2 class="section-main-heading">EXHIBITION ARCHIVE</h2>
+          </div>
+          <p class="font-mono text-muted" style="max-width:340px; font-size:0.85rem;">
+            Past exhibitions, publications, and spatial research programs.
+          </p>
+        </div>
+
+        <!-- Filter Tags -->
+        <div class="archive-controls reveal-on-scroll">
+          <button class="archive-filter-btn is-active" data-filter="all">All Shows (12)</button>
+          <button class="archive-filter-btn" data-filter="solo">Solo Installations</button>
+          <button class="archive-filter-btn" data-filter="sculpture">Sculpture & Optics</button>
+          <button class="archive-filter-btn" data-filter="painting">Painting</button>
+        </div>
+
+        <!-- Archive List -->
+        <!-- PLACEHOLDER ARTWORK: replace with client photography -->
+        <div class="archive-timeline-list">
+          <article class="archive-item reveal-on-scroll" data-category="sculpture">
+            <div class="archive-thumbnail">
+              <img src="assets/images/archive_1.jpg" alt="Laser light planes intersecting dark industrial architectural gallery columns" width="360" height="200" loading="lazy">
+            </div>
+            <div class="archive-details">
+              <span class="archive-year">2025 // NOV – JAN</span>
+              <h3 class="archive-title">SPECTRAL MONOLITH: CHRONO-PLANES</h3>
+              <span class="archive-artist">Aria Sterling with Marcus Thorne</span>
+            </div>
+            <div>
+              <span class="archive-tag">OPTICAL / LASER MATRIX</span>
+            </div>
+            <a href="#contact" class="archive-btn-view">Exhibition Docs →</a>
+          </article>
+
+          <article class="archive-item reveal-on-scroll" data-category="solo">
+            <div class="archive-thumbnail">
+              <img src="assets/images/artist_3.jpg" alt="Brutalist steel sculpture archive view" width="360" height="200" loading="lazy">
+            </div>
+            <div class="archive-details">
+              <span class="archive-year">2025 // MAY – JULY</span>
+              <h3 class="archive-title">ANALOG VOLTAGE: POST-HUMAN RELICS</h3>
+              <span class="archive-artist">Dax Ramirez (Solo)</span>
+            </div>
+            <div>
+              <span class="archive-tag">HEAVY METAL / NOBLE GAS</span>
+            </div>
+            <a href="#contact" class="archive-btn-view">Exhibition Docs →</a>
+          </article>
+
+          <article class="archive-item reveal-on-scroll" data-category="painting">
+            <div class="archive-thumbnail">
+              <img src="assets/images/artist_1.jpg" alt="Gestural painting exhibition view" width="360" height="200" loading="lazy">
+            </div>
+            <div class="archive-details">
+              <span class="archive-year">2024 // SEP – NOV</span>
+              <h3 class="archive-title">THE CATHARSIS OF MOMENTUM</h3>
+              <span class="archive-artist">Kaelen Voss</span>
+            </div>
+            <div>
+              <span class="archive-tag">EXPRESSIONIST OIL</span>
+            </div>
+            <a href="#contact" class="archive-btn-view">Exhibition Docs →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 7: VISIT (Spatial Guide & Map)
+         ====================================================================== -->
+    <section class="section-visit" id="visit" aria-label="Visit and Spatial Guide">
+      <div class="container">
+        <div class="section-eyebrow text-lime">SPATIAL ACCESS</div>
+        <h2 class="section-main-heading" style="margin-bottom:var(--space-2xl);">PLAN YOUR VISIT</h2>
+
+        <div class="visit-grid">
+          <!-- Hours & Location Info -->
+          <div class="visit-info-card reveal-on-scroll">
+            <div class="visit-block">
+              <div class="visit-block-title">Gallery Coordinates</div>
+              <div class="visit-block-content">
+                <strong>PRAXIS CONTEMPORARY</strong><br>
+                184 Chrystie Street (between Rivington & Delancey)<br>
+                Lower East Side, New York, NY 10002
+              </div>
+            </div>
+
+            <div class="visit-block">
+              <div class="visit-block-title">Public Opening Hours</div>
+              <div class="visit-block-content font-mono" style="font-size:0.95rem;">
+                <div>Wednesday – Saturday: <strong>11:00 – 19:00</strong></div>
+                <div>Sunday: <strong>12:00 – 17:00</strong></div>
+                <div class="text-muted">Monday – Tuesday: Closed / Private Appointments</div>
+              </div>
+            </div>
+
+            <div class="visit-block">
+              <div class="visit-block-title">Transit & Accessibility</div>
+              <div class="visit-block-content" style="font-size:0.95rem;">
+                <div class="transit-tags">
+                  <span class="subway-pill"><span class="line-badge line-orange">B</span><span class="line-badge line-orange">D</span> Grand St Station (2 min walk)</span>
+                  <span class="subway-pill"><span class="line-badge line-brown">J</span><span class="line-badge line-brown">Z</span> Bowery Station (3 min walk)</span>
+                </div>
+                <div class="text-muted" style="margin-top:10px; font-size:0.85rem;">
+                  ✓ Street-level accessible entrance • Wheelchair accessible galleries and restrooms.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stylized Interactive Blueprint Map Visual -->
+          <div class="visit-map-container reveal-on-scroll">
+            <!-- Vector Blueprint Visual Map -->
+            <svg class="map-svg-blueprint" viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Grid background lines -->
+              <path d="M0 50 H600 M0 100 H600 M0 150 H600 M0 200 H600 M0 250 H600 M0 300 H600 M0 350 H600 M0 400 H600" stroke="#1F202B" stroke-width="1"/>
+              <path d="M50 0 V450 M100 0 V450 M150 0 V450 M200 0 V450 M250 0 V450 M300 0 V450 M350 0 V450 M400 0 V450 M450 0 V450 M500 0 V450 M550 0 V450" stroke="#1F202B" stroke-width="1"/>
+              
+              <!-- Manhattan Streets (Chrystie, Bowery, Delancey, Houston) -->
+              <!-- Delancey St (Major Arterial) -->
+              <line x1="0" y1="280" x2="600" y2="280" stroke="#2B4CFF" stroke-width="6" opacity="0.4"/>
+              <line x1="0" y1="280" x2="600" y2="280" stroke="#F5F4EE" stroke-width="1.5" stroke-dasharray="8 6"/>
+              <text x="30" y="270" fill="#8E8D99" font-family="'Space Mono'" font-size="10" letter-spacing="1">DELANCEY STREET</text>
+
+              <!-- Houston St -->
+              <line x1="0" y1="90" x2="600" y2="90" stroke="#232430" stroke-width="5"/>
+              <text x="30" y="80" fill="#585764" font-family="'Space Mono'" font-size="9">E HOUSTON ST</text>
+
+              <!-- Chrystie St (Gallery Street) -->
+              <line x1="300" y1="0" x2="300" y2="450" stroke="#D4FF00" stroke-width="4" opacity="0.8"/>
+              <text x="310" y="40" fill="#D4FF00" font-family="'Space Mono'" font-size="11" font-weight="700" letter-spacing="2">CHRYSTIE ST</text>
+
+              <!-- Bowery -->
+              <line x1="160" y1="0" x2="160" y2="450" stroke="#2C2D3D" stroke-width="5"/>
+              <text x="170" y="40" fill="#585764" font-family="'Space Mono'" font-size="9">BOWERY</text>
+
+              <!-- Forsyth St & Sara D Roosevelt Park -->
+              <rect x="330" y="90" width="70" height="280" fill="#141E18" stroke="#1F3325" stroke-width="1"/>
+              <text x="345" y="230" fill="#3D664A" font-family="'Space Mono'" font-size="8" transform="rotate(90 345 230)">SARA D ROOSEVELT PARK</text>
+
+              <!-- Building Footprints -->
+              <rect x="230" y="180" width="60" height="80" fill="#1A1B24" stroke="#D4FF00" stroke-width="1.5"/>
+            </svg>
+
+            <!-- Map HUD Top -->
+            <div class="map-hud-top">
+              <span>GPS: 40.7196° N, 73.9928° W</span>
+              <span>LOWER EAST SIDE ARTS ZONE</span>
+            </div>
+
+            <!-- Animated Pin on Praxis Building -->
+            <div class="map-pin-indicator">
+              <div class="pin-pulse"></div>
+              <div class="pin-label">PRAXIS GALLERY (184 CHRYSTIE)</div>
+            </div>
+
+            <!-- Map HUD Bottom Controls -->
+            <div class="map-hud-bottom">
+              <span class="font-mono text-muted" style="font-size:0.75rem;">MAP // SECTOR LES-01</span>
+              <a href="https://maps.google.com/?q=184+Chrystie+Street+New+York+NY" target="_blank" rel="noopener noreferrer" class="btn-directions">
+                Open in Maps ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECTION 8: CONTACT & DISPATCH
+         ====================================================================== -->
+    <section class="section-contact" id="contact" aria-label="Contact and Dispatch">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Inquiries Information -->
+          <div class="contact-info-col reveal-on-scroll">
+            <div>
+              <div class="section-eyebrow text-lime">DIRECT COMMUNICATIONS</div>
+              <h2 class="section-main-heading">GET IN TOUCH</h2>
+            </div>
+
+            <div class="contact-card-item">
+              <div class="contact-label">General & Curatorial Inquiries</div>
+              <div class="contact-val">
+                <a href="mailto:info@praxis-contemporary.art">info@praxis-contemporary.art</a>
+              </div>
+            </div>
+
+            <div class="contact-card-item">
+              <div class="contact-label">Gallery Telephone</div>
+              <div class="contact-val">
+                <a href="tel:+12125550198">+1 (212) 555-0198</a>
+              </div>
+            </div>
+
+            <div class="contact-card-item">
+              <div class="contact-label">Press & Collector Relations</div>
+              <div class="contact-val">
+                <a href="mailto:vip@praxis-contemporary.art">vip@praxis-contemporary.art</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Collector Newsletter Dispatch -->
+          <div class="dispatch-box reveal-on-scroll">
+            <div>
+              <div class="section-eyebrow text-lime">EXHIBITION BULLETINS</div>
+              <h3 class="dispatch-title">JOIN THE DISPATCH</h3>
+              <p class="dispatch-desc" style="margin-top: 14px;">
+                Receive private view invitations, catalog pre-orders, and critical essays directly from our curatorial desk. Zero spam. Unsubscribe anytime.
+              </p>
+            </div>
+
+            <!-- TODO: Wire form submission to backend mailing list API endpoint -->
+            <form class="dispatch-form" id="dispatchForm" onsubmit="handleDispatchSubmit(event)">
+              <div class="form-input-group">
+                <label for="collectorEmail" class="sr-only" style="position:absolute; width:1px; height:1px; overflow:hidden;">Your Email Address</label>
+                <input 
+                  type="email" 
+                  id="collectorEmail" 
+                  class="dispatch-input" 
+                  placeholder="Enter collector email address..." 
+                  required 
+                  autocomplete="email"
+                >
+                <button type="submit" class="btn-dispatch-submit">Subscribe →</button>
+              </div>
+              <div class="dispatch-feedback-toast" id="dispatchFeedback" role="status" aria-live="polite">
+                ✓ Thank you. You have been added to the PRAXIS Exhibition Dispatch.
+              </div>
+            </form>
+
+            <div class="font-mono text-muted" style="font-size:0.75rem;">
+              PRAXIS IS COMMITTED TO STRICT PRIVACY & DATA PROTECTION.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       SECTION 9: FOOTER
+       ======================================================================== -->
+  <footer class="site-footer" id="footer" aria-label="Site Footer">
+    <div class="footer-watermark" aria-hidden="true">PRAXIS</div>
+
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand Summary -->
+        <div class="footer-col-brand">
+          <div class="footer-brand-title">PRAXIS // CONTEMPORARY</div>
+          <p class="footer-brand-desc">
+            Independent contemporary art gallery and research space in Lower East Side, New York. Presenting radical spatial installations, material painting, and speculative arts.
+          </p>
+          <div class="font-mono text-lime" style="font-size:0.8rem; margin-top:8px;">
+            184 CHRYSTIE ST • NEW YORK, NY 10002
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-links-col">
+          <div class="footer-links-title">PROGRAM</div>
+          <a href="#exhibitions" class="footer-link">Current Exhibition</a>
+          <a href="#artists" class="footer-link">Represented Artists</a>
+          <a href="#philosophy" class="footer-link">Philosophy & Manifesto</a>
+          <a href="#archive" class="footer-link">Exhibition Archive</a>
+          <a href="#visit" class="footer-link">Visitor Information</a>
+        </div>
+
+        <!-- External / Socials -->
+        <div class="footer-links-col">
+          <div class="footer-links-title">NETWORK</div>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram ↗</a>
+          <a href="https://artsy.net" target="_blank" rel="noopener noreferrer" class="footer-link">Artsy Roster ↗</a>
+          <a href="https://substack.com" target="_blank" rel="noopener noreferrer" class="footer-link">Curatorial Substack ↗</a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-link">Twitter / X ↗</a>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Legal & Back to Top -->
+      <div class="footer-bottom-row">
+        <div>
+          © 2026 PRAXIS CONTEMPORARY LLC. ALL RIGHTS RESERVED.
+        </div>
+        <button class="btn-scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Scroll back to top">
+          ↑ Back to Top
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       CLIENT INTERACTIVITY & ANIMATION LOGIC
+       ======================================================================== -->
+  <script>
+    // Header Scroll Condense Effect
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    }, { passive: true });
+
+    // Mobile Drawer Controls
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+
+    function toggleMobileMenu() {
+      const isOpen = mobileDrawer.classList.contains('is-open');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    }
+
+    function openMobileMenu() {
+      mobileDrawer.classList.add('is-open');
+      mobileDrawer.setAttribute('aria-hidden', 'false');
+      menuToggle.classList.add('is-active');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      drawerBackdrop.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileDrawer.classList.remove('is-open');
+      mobileDrawer.setAttribute('aria-hidden', 'true');
+      menuToggle.classList.remove('is-active');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      drawerBackdrop.classList.remove('is-active');
+      document.body.style.overflow = '';
+    }
+
+    menuToggle.addEventListener('click', toggleMobileMenu);
+    drawerBackdrop.addEventListener('click', closeMobileMenu);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileDrawer.classList.contains('is-open')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Custom Interactive Magnetic Cursor
+    const cursorFollower = document.getElementById('cursorFollower');
+    const cursorDot = document.getElementById('cursorDot');
+
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let followerX = mouseX;
+      let followerY = mouseY;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.left = `${mouseX}px`;
+        cursorDot.style.top = `${mouseY}px`;
+      });
+
+      function animateCursor() {
+        followerX += (mouseX - followerX) * 0.18;
+        followerY += (mouseY - followerY) * 0.18;
+        cursorFollower.style.left = `${followerX}px`;
+        cursorFollower.style.top = `${followerY}px`;
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      const refreshInteractives = () => {
+        const interactives = document.querySelectorAll('a, button, [role="button"], input, .artist-card, .archive-item');
+        interactives.forEach(el => {
+          el.addEventListener('mouseenter', () => cursorFollower.classList.add('is-hovering'));
+          el.addEventListener('mouseleave', () => cursorFollower.classList.remove('is-hovering'));
+        });
+      };
+      refreshInteractives();
+    }
+
+    // Scroll Reveal Intersection Observer
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -80px 0px',
+      threshold: 0.1
+    };
+
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // Archive Interactive Filtering
+    const filterButtons = document.querySelectorAll('.archive-filter-btn');
+    const archiveItems = document.querySelectorAll('.archive-item');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const filter = btn.getAttribute('data-filter');
+
+        archiveItems.forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.style.display = 'grid';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Newsletter Dispatch Form Handler (Front-end Demo Feedback)
+    function handleDispatchSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('collectorEmail');
+      const feedback = document.getElementById('dispatchFeedback');
+      if (input.value.trim()) {
+        feedback.style.display = 'block';
+        input.value = '';
+        setTimeout(() => {
+          feedback.style.display = 'none';
+        }, 5000);
+      }
+    }
+  </script>
+</body>
+</html>
