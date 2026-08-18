@@ -79,6 +79,15 @@
       --radius-full: 9999px;
     }
 
+    @media (max-width: 768px) {
+      :root {
+        --space-lg: 24px;
+        --space-xl: 36px;
+        --space-2xl: 48px;
+        --space-3xl: 64px;
+      }
+    }
+
     /* ==========================================================================
        RESET & BASE STYLES
        ========================================================================== */
@@ -277,7 +286,7 @@
 
     .site-header.is-scrolled {
       height: var(--header-height-condensed);
-      background-color: rgba(10, 10, 12, 0.92);
+      background-color: rgba(10, 10, 12, 0.8);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--color-border);
@@ -504,6 +513,7 @@
       padding: 100px var(--container-pad) 40px;
       transition: right 0.45s var(--ease-out-expo);
       border-left: 1px solid var(--color-border-strong);
+      overflow-y: auto;
     }
     @media (min-width: 500px) {
       .mobile-drawer {
@@ -691,6 +701,19 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 18px;
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+      }
+      .btn-hero-primary, .btn-hero-secondary {
+        justify-content: center;
+        width: 100%;
+        text-align: center;
+      }
     }
 
     .btn-hero-primary {
@@ -1036,6 +1059,12 @@
       font-size: 0.8rem;
     }
 
+    @media (max-width: 480px) {
+      .exhibition-meta-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .meta-item {
       padding: 10px 14px;
       background: rgba(23, 23, 28, 0.4);
@@ -1124,6 +1153,18 @@
       align-items: center;
       font-family: var(--font-mono);
       font-size: 0.78rem;
+    }
+
+    @media (max-width: 580px) {
+      .artwork-tag-overlay {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px 14px;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+      }
     }
 
     .artwork-tag-overlay .title {
@@ -1236,11 +1277,17 @@
 
     .cylinder-rotator {
       position: relative;
-      width: 290px;
-      height: 440px;
+      width: 200px;
+      height: 300px;
       transform-style: preserve-3d;
       will-change: transform;
       z-index: 2;
+    }
+    @media (min-width: 480px) {
+      .cylinder-rotator {
+        width: 250px;
+        height: 380px;
+      }
     }
     @media (min-width: 768px) {
       .cylinder-rotator {
@@ -1329,6 +1376,18 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .card-image-name {
+        font-size: 0.95rem;
+      }
+      .card-artist-name {
+        font-size: 0.75rem;
+      }
+      .card-exhibit-location {
+        font-size: 0.68rem;
+      }
     }
     .card-exhibit-location .pin-icon {
       color: var(--color-accent-lime);
@@ -1519,6 +1578,12 @@
         gap: 32px;
       }
     }
+    @media (max-width: 480px) {
+      .archive-item {
+        padding: 16px;
+        gap: 16px;
+      }
+    }
 
     .archive-item:hover {
       background-color: #1E1E26;
@@ -1697,6 +1762,13 @@
       padding: 24px;
     }
 
+    @media (max-width: 768px) {
+      .visit-map-container {
+        min-height: 300px;
+        padding: 16px;
+      }
+    }
+
     .map-svg-blueprint {
       position: absolute;
       inset: 0;
@@ -1861,7 +1933,7 @@
 
     .dispatch-title {
       font-family: var(--font-display);
-      font-size: 2.2rem;
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
@@ -1985,7 +2057,7 @@
 
     .footer-brand-title {
       font-family: var(--font-display);
-      font-size: 1.75rem;
+      font-size: clamp(1.4rem, 4vw, 1.75rem);
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
@@ -2019,6 +2091,9 @@
       color: var(--color-muted);
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
     .footer-link:hover {
       color: var(--color-foreground);
@@ -2315,9 +2390,7 @@
             <div class="section-eyebrow text-lime">ROSTER // 2026</div>
             <h2 class="section-main-heading">REPRESENTED ARTISTS</h2>
           </div>
-          <p class="font-mono text-muted" style="max-width:440px; font-size:0.85rem;">
-            Continuous 3D perspective gallery. Cards rotate smoothly around the cylindrical ring. Hover to pause or drag to spin freely.
-          </p>
+
         </div>
       </div>
 
@@ -2333,7 +2406,7 @@
             <div class="cylinder-card-overlay">
               <div class="card-image-name">GESTURAL IMPETUS NO. 04</div>
               <div class="card-artist-name">KAELEN VOSS</div>
-              <div class="card-exhibit-location"><span class="pin-icon">📍</span> MAIN HALL — NEW YORK</div>
+              <div class="card-exhibit-location">MAIN HALL — NEW YORK</div>
             </div>
           </div>
 
@@ -2344,7 +2417,7 @@
             <div class="cylinder-card-overlay">
               <div class="card-image-name">PRISMATIC HORIZONS</div>
               <div class="card-artist-name">ARIA STERLING</div>
-              <div class="card-exhibit-location"><span class="pin-icon">📍</span> OPTICS PAVILION — LONDON</div>
+              <div class="card-exhibit-location">OPTICS PAVILION — LONDON</div>
             </div>
           </div>
 
@@ -2355,7 +2428,7 @@
             <div class="cylinder-card-overlay">
               <div class="card-image-name">INDUSTRIAL ARTIFACT 88</div>
               <div class="card-artist-name">DAX RAMIREZ</div>
-              <div class="card-exhibit-location"><span class="pin-icon">📍</span> SCULPTURE YARD — MEXICO CITY</div>
+              <div class="card-exhibit-location">SCULPTURE YARD — MEXICO CITY</div>
             </div>
           </div>
 
@@ -2366,7 +2439,7 @@
             <div class="cylinder-card-overlay">
               <div class="card-image-name">LUMINESCENT WEFT</div>
               <div class="card-artist-name">ZHEN WEI</div>
-              <div class="card-exhibit-location"><span class="pin-icon">📍</span> MEDIA ATRIUM — TOKYO</div>
+              <div class="card-exhibit-location">MEDIA ATRIUM — TOKYO</div>
             </div>
           </div>
 
@@ -2377,7 +2450,7 @@
             <div class="cylinder-card-overlay">
               <div class="card-image-name">SONIC RESONANCES</div>
               <div class="card-artist-name">MARCUS THORNE</div>
-              <div class="card-exhibit-location"><span class="pin-icon">📍</span> WEST WING — LOS ANGELES</div>
+              <div class="card-exhibit-location">WEST WING — LOS ANGELES</div>
             </div>
           </div>
 
@@ -2388,7 +2461,7 @@
             <div class="cylinder-card-overlay">
               <div class="card-image-name">SYNTHETIC MINERALOGY</div>
               <div class="card-artist-name">ELENA VANCE</div>
-              <div class="card-exhibit-location"><span class="pin-icon">📍</span> CHRYSTIE VAULT — NEW YORK</div>
+              <div class="card-exhibit-location">CHRYSTIE VAULT — NEW YORK</div>
             </div>
           </div>
 
@@ -2399,7 +2472,7 @@
             <div class="cylinder-card-overlay">
               <div class="card-image-name">CHRONO-PLANES MATRIX</div>
               <div class="card-artist-name">ARIA STERLING</div>
-              <div class="card-exhibit-location"><span class="pin-icon">📍</span> EAST GALLERY — BASEL</div>
+              <div class="card-exhibit-location">EAST GALLERY — BASEL</div>
             </div>
           </div>
 
@@ -2410,7 +2483,7 @@
             <div class="cylinder-card-overlay">
               <div class="card-image-name">VOLCANIC STRATA NO. 02</div>
               <div class="card-artist-name">TARO TAKAHASHI</div>
-              <div class="card-exhibit-location"><span class="pin-icon">📍</span> NORTH ATRIUM — KYOTO</div>
+              <div class="card-exhibit-location">NORTH ATRIUM — KYOTO</div>
             </div>
           </div>
 
@@ -2429,10 +2502,10 @@
           <div class="philosophy-manifesto reveal-on-scroll">
             <div class="philosophy-eyebrow">CURATORIAL MANIFESTO</div>
             <blockquote class="philosophy-quote">
-              "We champion <span class="highlight">radical</span>, genre-defying contemporary practices at the intersection of material sculpture, speculative digitalism, and raw visceral painting. <span class="highlight">No beige art.</span> No polite compromises."
+              "We champion <span class="highlight">radical</span> practices. <span class="highlight">No beige art.</span> No polite compromises."
             </blockquote>
             <p class="philosophy-text">
-              Founded in New York's Lower East Side, PRAXIS operates as a laboratory for uncompromising ideas. We reject decorative market complacency in favor of audacious physical presence, intense materiality, and conceptual courage.
+              Founded in New York's Lower East Side, PRAXIS operates as a laboratory for uncompromising physical presence and conceptual courage.
             </p>
           </div>
 
@@ -2581,7 +2654,7 @@
           <!-- Stylized Interactive Blueprint Map Visual -->
           <div class="visit-map-container reveal-on-scroll">
             <!-- Vector Blueprint Visual Map -->
-            <svg class="map-svg-blueprint" viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg class="map-svg-blueprint" viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
               <!-- Grid background lines -->
               <path d="M0 50 H600 M0 100 H600 M0 150 H600 M0 200 H600 M0 250 H600 M0 300 H600 M0 350 H600 M0 400 H600" stroke="#1F202B" stroke-width="1"/>
               <path d="M50 0 V450 M100 0 V450 M150 0 V450 M200 0 V450 M250 0 V450 M300 0 V450 M350 0 V450 M400 0 V450 M450 0 V450 M500 0 V450 M550 0 V450" stroke="#1F202B" stroke-width="1"/>
@@ -2743,10 +2816,22 @@
         <!-- External / Socials -->
         <div class="footer-links-col">
           <div class="footer-links-title">NETWORK</div>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram ↗</a>
-          <a href="https://artsy.net" target="_blank" rel="noopener noreferrer" class="footer-link">Artsy Roster ↗</a>
-          <a href="https://substack.com" target="_blank" rel="noopener noreferrer" class="footer-link">Curatorial Substack ↗</a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-link">Twitter / X ↗</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            Instagram ↗
+          </a>
+          <a href="https://artsy.net" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            Artsy Roster ↗
+          </a>
+          <a href="https://substack.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.534 8.285H1.466V5.215h21.068v3.07zm0 5.485H1.466v-3.07h21.068v3.07zm0 5.485H1.466v-6.14h21.068v6.14z"/></svg>
+            Curatorial Substack ↗
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Twitter / X ↗
+          </a>
         </div>
       </div>
 
