@@ -511,9 +511,10 @@
       flex-direction: column;
       justify-content: space-between;
       padding: 100px var(--container-pad) 40px;
-      transition: right 0.45s var(--ease-out-expo);
+      transition: right 0.45s var(--ease-out-expo), visibility 0.45s var(--ease-out-expo);
       border-left: 1px solid var(--color-border-strong);
       overflow-y: auto;
+      visibility: hidden;
     }
     @media (min-width: 500px) {
       .mobile-drawer {
@@ -523,6 +524,7 @@
 
     .mobile-drawer.is-open {
       right: 0;
+      visibility: visible;
     }
 
     .mobile-nav-links {
@@ -663,7 +665,7 @@
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(3.2rem, 9.5vw, 8.5rem);
+      font-size: clamp(2.5rem, 9.5vw, 8.5rem);
       font-weight: 900;
       line-height: 0.88;
       letter-spacing: -0.04em;
@@ -830,8 +832,8 @@
 
     /* Live Animated Marquee Ticker */
     .hero-ticker-tape {
-      width: 100vw;
-      margin-left: calc(-50vw + 50%);
+      width: 100%;
+      margin-left: 0;
       background-color: var(--color-accent-lime);
       color: #000000;
       padding: 12px 0;
@@ -943,7 +945,7 @@
     /* Kinetic Text & Mineral Gradient Title */
     .exhibition-title {
       font-family: var(--font-display);
-      font-size: clamp(2.6rem, 5.8vw, 5rem);
+      font-size: clamp(2.0rem, 5.8vw, 5rem);
       font-weight: 800;
       line-height: 0.94;
       letter-spacing: -0.035em;
@@ -1228,7 +1230,7 @@
 
     .section-main-heading {
       font-family: var(--font-display);
-      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-size: clamp(1.8rem, 5vw, 4.2rem);
       font-weight: 800;
       letter-spacing: -0.03em;
       text-transform: uppercase;
@@ -1238,12 +1240,12 @@
     /* Expansive Full-Width 3D Continuous Cylinder Carousel Stage */
     .cylinder-stage-viewport {
       position: relative;
-      width: 100vw;
-      margin-left: calc(-50vw + 50%);
+      width: 100%;
+      margin-left: 0;
       height: 740px;
       perspective: 1250px;
       perspective-origin: 50% 48%;
-      overflow: visible;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
